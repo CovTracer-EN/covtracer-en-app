@@ -4,7 +4,8 @@ import { useTranslation } from "react-i18next"
 import { useNavigation } from "@react-navigation/native"
 import env from "react-native-config"
 
-import { useLocaleInfo } from "../locales/languages"
+import ShareAnonymizedDataListItem from "./ShareAnonymizedDataListItem"
+import { enabledLocales, useLocaleInfo } from "../locales/languages"
 import {
   useStatusBarEffect,
   ModalStackScreens,
@@ -23,7 +24,6 @@ import {
 
 import { Images, Icons } from "../assets"
 import { Colors, Spacing, Typography } from "../styles"
-import ShareAnonymizedDataListItem from "./ShareAnonymizedDataListItem"
 
 type SettingsListItem = {
   label: string
@@ -44,7 +44,7 @@ const Settings: FunctionComponent = () => {
   const { healthAuthorityName, about: customAboutCopy } = useCustomCopy()
 
   const { languageName } = useLocaleInfo()
-  const showDebugMenu = env.STAGING === "true" || __DEV__
+  const showDebugMenu = env.DISPLAY_DEBUG_MENU === "true" || __DEV__
 
   const handleOnPressSelectLanguage = () => {
     navigation.navigate(ModalStackScreens.LanguageSelection)
@@ -54,6 +54,10 @@ const Settings: FunctionComponent = () => {
     navigation.navigate(ModalStackScreens.HowItWorksReviewFromSettings, {
       screen: HowItWorksStackScreens.Introduction,
     })
+  }
+
+  const handleOnPressContact = () => {
+    navigation.navigate(SettingsStackScreens.Contact)
   }
 
   const handleOnPressDeleteMyData = () => {
@@ -78,6 +82,12 @@ const Settings: FunctionComponent = () => {
     onPress: handleOnPressHowTheAppWorks,
     icon: Icons.RestartWithCheck,
   }
+  const contactPage: SettingsListItem = {
+    label: t("screen_titles.contact"),
+    accessibilityLabel: t("screen_titles.contact"),
+    onPress: handleOnPressContact,
+    icon: Icons.Phone,
+  }
   const deleteMyData: SettingsListItem = {
     label: t("settings.delete_my_data"),
     accessibilityLabel: t("settings.delete_my_data"),
@@ -91,7 +101,11 @@ const Settings: FunctionComponent = () => {
     icon: Icons.Document,
   }
 
-  const middleListItems: SettingsListItem[] = [legal, howTheAppWorks]
+  const middleListItems: SettingsListItem[] = [
+    legal,
+    howTheAppWorks,
+    contactPage,
+  ]
 
   const authorityLinks = applyTranslations(
     loadAuthorityLinks("about"),
@@ -107,19 +121,23 @@ const Settings: FunctionComponent = () => {
 
   const osInfo = `${Platform.OS} v${Platform.Version}`
 
+  const showLanguagePicker = enabledLocales().length > 1
+
   return (
     <>
       <StatusBar backgroundColor={Colors.secondary.shade10} />
       <ScrollView style={style.container} alwaysBounceVertical={false}>
         <Text style={style.headerText}>{t("screen_titles.settings")}</Text>
-        <View style={style.section}>
-          <ListItem
-            label={selectLanguage.label}
-            accessibilityLabel={selectLanguage.accessibilityLabel}
-            onPress={selectLanguage.onPress}
-            icon={selectLanguage.icon}
-          />
-        </View>
+        {showLanguagePicker && (
+          <View style={style.section} testID={"settings-language-picker"}>
+            <ListItem
+              label={selectLanguage.label}
+              accessibilityLabel={selectLanguage.accessibilityLabel}
+              onPress={selectLanguage.onPress}
+              icon={selectLanguage.icon}
+            />
+          </View>
+        )}
         <View style={style.section}>
           {middleListItems.map((params, idx) => {
             const isLastItem = idx === middleListItems.length - 1
@@ -157,6 +175,7 @@ const Settings: FunctionComponent = () => {
         )}
         <View style={style.bottomContainer}>
           <Text style={style.aboutContent}>{aboutContent}</Text>
+
           {authorityLinks?.map(({ url, label }) => {
             return <ExternalLink key={label} url={url} label={label} />
           })}

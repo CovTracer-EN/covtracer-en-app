@@ -6,6 +6,7 @@ import {
 
 import Settings from "../Settings/"
 import Legal from "../Settings/Legal"
+import Contact from "../Settings/Contact"
 import ENDebugMenu from "../Settings/ENDebugMenu"
 import ENLocalDiagnosisKey from "../Settings/ENLocalDiagnosisKeyScreen"
 import ExposureListDebug from "../Settings/ExposureListDebugScreen"
@@ -35,6 +36,11 @@ const SettingsStack: FunctionComponent = () => {
       <Stack.Screen
         name={SettingsStackScreens.Legal}
         component={Legal}
+        options={defaultScreenOptions}
+      />
+      <Stack.Screen
+        name={SettingsStackScreens.Contact}
+        component={Contact}
         options={defaultScreenOptions}
       />
       <Stack.Screen

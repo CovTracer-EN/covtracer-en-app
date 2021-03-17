@@ -56,6 +56,10 @@ const Settings: FunctionComponent = () => {
     })
   }
 
+  const handleOnPressContact = () => {
+    navigation.navigate(SettingsStackScreens.Contact)
+  }
+
   const handleOnPressDeleteMyData = () => {
     navigation.navigate(SettingsStackScreens.DeleteConfirmation)
   }
@@ -78,6 +82,12 @@ const Settings: FunctionComponent = () => {
     onPress: handleOnPressHowTheAppWorks,
     icon: Icons.RestartWithCheck,
   }
+  const contactPage: SettingsListItem = {
+    label: t("screen_titles.contact"),
+    accessibilityLabel: t("screen_titles.contact"),
+    onPress: handleOnPressContact,
+    icon: Icons.Phone,
+  }
   const deleteMyData: SettingsListItem = {
     label: t("settings.delete_my_data"),
     accessibilityLabel: t("settings.delete_my_data"),
@@ -91,7 +101,7 @@ const Settings: FunctionComponent = () => {
     icon: Icons.Document,
   }
 
-  const middleListItems: SettingsListItem[] = [legal, howTheAppWorks]
+  const middleListItems: SettingsListItem[] = [legal, howTheAppWorks, contactPage]
 
   const authorityLinks = applyTranslations(
     loadAuthorityLinks("about"),

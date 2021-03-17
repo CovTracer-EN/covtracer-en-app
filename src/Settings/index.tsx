@@ -101,7 +101,11 @@ const Settings: FunctionComponent = () => {
     icon: Icons.Document,
   }
 
-  const middleListItems: SettingsListItem[] = [legal, howTheAppWorks, contactPage]
+  const middleListItems: SettingsListItem[] = [
+    legal,
+    howTheAppWorks,
+    contactPage,
+  ]
 
   const authorityLinks = applyTranslations(
     loadAuthorityLinks("about"),

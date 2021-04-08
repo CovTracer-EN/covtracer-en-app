@@ -23,6 +23,8 @@ import LogoMoh from "./logo-moh.png"
 import LogoMorni from "./logo-morni.png"
 import LogoNicosiaMunicipality from "./logo-nicosia-municipality.png"
 import LogoPathCheck from "./logo-path-check.png"
+import LogoCerth from "./logo-certh.png"
+import LogoIti from "./logo-iti.png"
 
 export const Images = {
   CheckInCircle,
@@ -50,4 +52,6 @@ export const Images = {
   LogoMorni,
   LogoNicosiaMunicipality,
   LogoPathCheck,
+  LogoCerth,
+  LogoIti,
 }

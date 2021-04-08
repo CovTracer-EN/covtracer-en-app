@@ -1,29 +1,21 @@
-import React, { FunctionComponent } from "react"
-import { Platform, ScrollView, View, StyleSheet, Image } from "react-native"
-import { useTranslation } from "react-i18next"
-import { useNavigation } from "@react-navigation/native"
-import env from "react-native-config"
+import React, { FunctionComponent } from 'react'
+import { Image, Platform, ScrollView, StyleSheet, View } from 'react-native'
+import { useTranslation } from 'react-i18next'
+import { useNavigation } from '@react-navigation/native'
+import env from 'react-native-config'
 
-import ShareAnonymizedDataListItem from "./ShareAnonymizedDataListItem"
-import { enabledLocales, useLocaleInfo } from "../locales/languages"
-import {
-  useStatusBarEffect,
-  ModalStackScreens,
-  SettingsStackScreens,
-  HowItWorksStackScreens,
-} from "../navigation"
-import { useConfigurationContext } from "../ConfigurationContext"
-import { Text, ListItem, ListItemSeparator, StatusBar } from "../components"
-import { useApplicationInfo } from "../Device/useApplicationInfo"
-import ExternalLink from "../Settings/ExternalLink"
-import { useCustomCopy } from "../configuration/useCustomCopy"
-import {
-  loadAuthorityLinks,
-  applyTranslations,
-} from "../configuration/authorityLinks"
+import ShareAnonymizedDataListItem from './ShareAnonymizedDataListItem'
+import { enabledLocales, useLocaleInfo } from '../locales/languages'
+import { HowItWorksStackScreens, ModalStackScreens, SettingsStackScreens, useStatusBarEffect, } from '../navigation'
+import { useConfigurationContext } from '../ConfigurationContext'
+import { ListItem, ListItemSeparator, StatusBar, Text } from '../components'
+import { useApplicationInfo } from '../Device/useApplicationInfo'
+import ExternalLink from '../Settings/ExternalLink'
+import { useCustomCopy } from '../configuration/useCustomCopy'
+import { applyTranslations, loadAuthorityLinks, } from '../configuration/authorityLinks'
 
-import { Images, Icons } from "../assets"
-import { Colors, Spacing, Typography } from "../styles"
+import { Icons, Images } from '../assets'
+import { Colors, Spacing, Typography } from '../styles'
 
 type SettingsListItem = {
   label: string
@@ -33,7 +25,7 @@ type SettingsListItem = {
 }
 
 const Settings: FunctionComponent = () => {
-  useStatusBarEffect("dark-content", Colors.secondary.shade10)
+  useStatusBarEffect('dark-content', Colors.secondary.shade10)
   const {
     t,
     i18n: { language: localeCode },
@@ -44,7 +36,7 @@ const Settings: FunctionComponent = () => {
   const { healthAuthorityName, about: customAboutCopy } = useCustomCopy()
 
   const { languageName } = useLocaleInfo()
-  const showDebugMenu = env.DISPLAY_DEBUG_MENU === "true" || __DEV__
+  const showDebugMenu = env.DISPLAY_DEBUG_MENU === 'true' || __DEV__
 
   const handleOnPressSelectLanguage = () => {
     navigation.navigate(ModalStackScreens.LanguageSelection)
@@ -66,37 +58,37 @@ const Settings: FunctionComponent = () => {
 
   const selectLanguage: SettingsListItem = {
     label: languageName,
-    accessibilityLabel: t("common.select_language"),
+    accessibilityLabel: t('common.select_language'),
     onPress: handleOnPressSelectLanguage,
     icon: Icons.LanguagesIcon,
   }
   const legal: SettingsListItem = {
-    label: t("screen_titles.legal"),
-    accessibilityLabel: t("screen_titles.legal"),
+    label: t('screen_titles.legal'),
+    accessibilityLabel: t('screen_titles.legal'),
     onPress: () => navigation.navigate(SettingsStackScreens.Legal),
     icon: Icons.Document,
   }
   const howTheAppWorks: SettingsListItem = {
-    label: t("screen_titles.how_the_app_works"),
-    accessibilityLabel: t("screen_titles.how_the_app_works"),
+    label: t('screen_titles.how_the_app_works'),
+    accessibilityLabel: t('screen_titles.how_the_app_works'),
     onPress: handleOnPressHowTheAppWorks,
     icon: Icons.RestartWithCheck,
   }
   const contactPage: SettingsListItem = {
-    label: t("screen_titles.contact"),
-    accessibilityLabel: t("screen_titles.contact"),
+    label: t('screen_titles.contact'),
+    accessibilityLabel: t('screen_titles.contact'),
     onPress: handleOnPressContact,
     icon: Icons.Phone,
   }
   const deleteMyData: SettingsListItem = {
-    label: t("settings.delete_my_data"),
-    accessibilityLabel: t("settings.delete_my_data"),
+    label: t('settings.delete_my_data'),
+    accessibilityLabel: t('settings.delete_my_data'),
     onPress: handleOnPressDeleteMyData,
     icon: Icons.Trash,
   }
   const debugMenu: SettingsListItem = {
-    label: "EN Debug Menu",
-    accessibilityLabel: "EN Debug Menu",
+    label: 'EN Debug Menu',
+    accessibilityLabel: 'EN Debug Menu',
     onPress: () => navigation.navigate(SettingsStackScreens.ENDebugMenu),
     icon: Icons.Document,
   }
@@ -108,13 +100,13 @@ const Settings: FunctionComponent = () => {
   ]
 
   const authorityLinks = applyTranslations(
-    loadAuthorityLinks("about"),
+    loadAuthorityLinks('about'),
     localeCode,
   )
 
   const aboutContent =
     customAboutCopy ||
-    t("about.description", {
+    t('about.description', {
       applicationName,
       healthAuthorityName,
     })
@@ -125,11 +117,11 @@ const Settings: FunctionComponent = () => {
 
   return (
     <>
-      <StatusBar backgroundColor={Colors.secondary.shade10} />
+      <StatusBar backgroundColor={Colors.secondary.shade10}/>
       <ScrollView style={style.container} alwaysBounceVertical={false}>
-        <Text style={style.headerText}>{t("screen_titles.settings")}</Text>
+        <Text style={style.headerText}>{t('screen_titles.settings')}</Text>
         {showLanguagePicker && (
-          <View style={style.section} testID={"settings-language-picker"}>
+          <View style={style.section} testID={'settings-language-picker'}>
             <ListItem
               label={selectLanguage.label}
               accessibilityLabel={selectLanguage.accessibilityLabel}
@@ -144,7 +136,7 @@ const Settings: FunctionComponent = () => {
             return (
               <View key={params.label}>
                 <ListItem {...params} />
-                {!isLastItem && <ListItemSeparator />}
+                {!isLastItem && <ListItemSeparator/>}
               </View>
             )
           })}
@@ -158,8 +150,8 @@ const Settings: FunctionComponent = () => {
           />
           {enableProductAnalytics && (
             <>
-              <ListItemSeparator />
-              <ShareAnonymizedDataListItem />
+              <ListItemSeparator/>
+              <ShareAnonymizedDataListItem/>
             </>
           )}
         </View>
@@ -177,31 +169,31 @@ const Settings: FunctionComponent = () => {
           <Text style={style.aboutContent}>{aboutContent}</Text>
 
           {authorityLinks?.map(({ url, label }) => {
-            return <ExternalLink key={label} url={url} label={label} />
+            return <ExternalLink key={label} url={url} label={label}/>
           })}
           <View style={style.infoRowContainer}>
             <View style={style.logoRow}>
-              <Image source={Images.LogoMoh} style={style.logo} />
-              <Image source={Images.LogoMorni} style={style.logo} />
-              {/*</View>*/}
-              {/*<View style={style.logoRow}>*/}
-              <Image source={Images.LogoRise} style={style.logo} />
-              <Image source={Images.LogoKios} style={style.logo} />
-              {/*</View>*/}
-              {/*<View style={style.logoRow}>*/}
+              <Text style={{ ...style.aboutContent, ...style.logoHeader }}>{t('settings.synergies')}</Text>
+              <Image source={Images.LogoMoh} style={style.logo}/>
+              <Image source={Images.LogoMorni} style={style.logo}/>
+              <Image source={Images.LogoRise} style={style.logo}/>
+              <Image source={Images.LogoKios} style={style.logo}/>
+              <Text style={{ ...style.aboutContent, ...style.logoHeader }}>{t('settings.collaborators')}</Text>
               <Image
                 source={Images.LogoNicosiaMunicipality}
                 style={style.logo}
               />
-              <Image source={Images.LogoPathCheck} style={style.logo} />
+              <Image source={Images.LogoPathCheck} style={style.logo}/>
+              <Image source={Images.LogoCerth} style={style.logo}/>
+              <Image source={Images.LogoIti} style={style.logo}/>
             </View>
             <View style={style.infoRow}>
-              <Text style={style.infoRowLabel}>{t("about.version")}</Text>
+              <Text style={style.infoRowLabel}>{t('about.version')}</Text>
               <Text style={style.infoRowValue}>{versionInfo}</Text>
             </View>
             <View style={style.infoRow}>
               <Text style={style.infoRowLabel}>
-                {t("about.operating_system_abbr")}
+                {t('about.operating_system_abbr')}
               </Text>
               <Text style={style.infoRowValue}>{osInfo}</Text>
             </View>
@@ -239,7 +231,7 @@ const style = StyleSheet.create({
     marginBottom: Spacing.medium,
   },
   infoRow: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   infoRowLabel: {
     ...Typography.header.x20,
@@ -253,14 +245,16 @@ const style = StyleSheet.create({
   },
   logoRow: {
     // flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   logo: {
     height: 100,
-    aspectRatio: 2 / 1,
-    // width: 100,
+    aspectRatio: 2,
   },
+  logoHeader: {
+    marginTop: Spacing.medium,
+  }
 })
 
 export default Settings

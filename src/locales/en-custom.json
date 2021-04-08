@@ -40,6 +40,8 @@
     }
   },
   "settings": {
+    "synergies": "Synergies",
+    "collaborators": "Collaborators",
     "privacy_policy_description": "This privacy notice explains what data is collected when you use the CovTracer-EN, how that data is used, and your rights under data protection law.\n\nTo ensure that this privacy notice can be understood by all users, we have made every effort to make it simple and as non-technical as possible. The CovTracer-EN (the “Mobile App”) has been developed by the Research Centre on Interactive Media, Smart Systems and Emerging Technologies (RISE) (the “RISE CoE”), in collaboration with the KIOS Center of Excellence, University of Cyprus (the “KIOS CoE”) as a Join Project assigned by the Ministry of Health of the Republic of Cyprus (the “MoH”)and Coordinated by the Cyprus National eHealth Authority with the Deputy Ministry of Research Innovation and Digital Policy of the Republic of Cyprus serving a consultative function. The Cyprus National eHealth Authority with the Deputy Ministry of Research Innovation and Digital Policy of the Republic of Cyprus are not involved in any Data Management.",
     "call_center": "Call Center",
     "website": "Website"

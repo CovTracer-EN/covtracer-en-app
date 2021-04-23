@@ -1,0 +1,37 @@
+#!/bin/bash
+
+### Update package.json
+npm version prerelease --no-git-tag-version
+
+versionCode=$(cat package.json | grep version | grep -oE '\-[0-9]+')
+
+npm version patch --no-git-tag-version
+npm version patch --no-git-tag-version
+
+line=$(cat package.json | grep -n version | cut -f1 -d:)
+sed -i -e "${line}s/\",/${versionCode}\",/" package.json
+
+v=$(cat package.json | grep version | grep -oE '"[0-9].+' | tr -d '",')
+arr=(${v/-/ })
+
+### Android
+AndroidFile=android/app/build.gradle
+
+line=$(cat ${AndroidFile} | grep -n versionCode | cut -f1 -d:)
+sed -i -e "${line}s/[0-9]\+/${arr[1]}/" ${AndroidFile}
+
+line=$(cat ${AndroidFile} | grep -n versionName | cut -f1 -d:)
+sed -i -e "${line}s/\".\+\"/\"${arr[0]}\"/" ${AndroidFile}
+
+### iOS
+IOSFile=ios/COVIDSafePaths.xcodeproj/project.pbxproj
+
+sed -i -e "s/MARKETING_VERSION = .\+/MARKETING_VERSION = ${arr[0]};/" ${IOSFile}
+sed -i -e "s/CURRENT_PROJECT_VERSION = .\+/CURRENT_PROJECT_VERSION = ${arr[1]};/" ${IOSFile}
+
+
+
+
+
+
+

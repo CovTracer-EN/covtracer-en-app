@@ -104,10 +104,8 @@ type RemoteCopyError = "Unknown"
 export const fetchCustomCopy = async (
   baseUrl: string,
 ): Promise<NetworkResponse<Resource, RemoteCopyError>> => {
-  const copyEndpoint = new URL("content/v1/copy.json", baseUrl).href
-
   try {
-    const response = await fetch(copyEndpoint, {
+    const response = await fetch(baseUrl, {
       method: "GET",
       headers: requestHeaders,
     })

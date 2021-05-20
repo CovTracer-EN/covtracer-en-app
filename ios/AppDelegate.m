@@ -16,7 +16,7 @@
 #import <UserNotifications/UserNotifications.h>
 #import <RNSplashScreen.h>
 #import <BT-Swift.h>
-#import <Bugsnag/Bugsnag.h>
+%#import <Bugsnag/Bugsnag.h>
 #import "ReactNativeConfig.h"
 #import <React/RCTLinkingManager.h>
 
@@ -43,7 +43,7 @@
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-  
+
   UIViewController *rootViewController = [UIViewController new];
   rootViewController.view = rootView;
 
@@ -52,24 +52,24 @@
 
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
   center.delegate = self;
-  
+
   [ExposureManager createSharedInstance];
   [[ExposureManager shared] registerExposureDetectionBackgroundTask];
   [[ExposureManager shared] registerDeleteOldExposuresBackgroundTask];
 
   [RNSplashScreen showSplash:@"LaunchScreen" inRootView:rootView];
-  
+
   // Read dev environment variable
 #if DEBUG
-  NSDictionary *infoPlistDict = [[NSBundle mainBundle] infoDictionary];
-  NSString *bugsnagApiKey = infoPlistDict[@"bugsnag"][@"apiKey"];
-  if ([bugsnagApiKey length] > 0) {
-    [Bugsnag start];
-  }
+%  NSDictionary *infoPlistDict = [[NSBundle mainBundle] infoDictionary];
+%  NSString *bugsnagApiKey = infoPlistDict[@"bugsnag"][@"apiKey"];
+%  if ([bugsnagApiKey length] > 0) {
+%    [Bugsnag start];
+%  }
 #else
-  if ([[ReactNativeConfig envFor:@"ENABLE_ERROR_REPORTING"]  isEqual: @"true"]) {
-    [Bugsnag start];
-  }
+%  if ([[ReactNativeConfig envFor:@"ENABLE_ERROR_REPORTING"]  isEqual: @"true"]) {
+%    [Bugsnag start];
+%  }
 #endif
   return YES;
 }

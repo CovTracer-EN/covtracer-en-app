@@ -2,8 +2,8 @@ package org.pathcheck.covidsafepaths;
 
 import android.app.Application;
 import android.content.Context;
-import com.bugsnag.android.Bugsnag;
-import com.bugsnag.android.Configuration;
+//import com.bugsnag.android.Bugsnag;
+//import com.bugsnag.android.Configuration;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
@@ -57,19 +57,18 @@ public class MainApplication extends Application implements ReactApplication {
     SoLoader.init(this, /* native exopackage */ false);
     Realm.init(this);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
-    initializeBugsnag();
   }
 
-  @SuppressWarnings("ConstantConditions")
-  private void initializeBugsnag() {
-    Configuration config = Configuration.load(this);
-    // Disable bugsnag for release builds
-    config.setReleaseStage("release".equals(BuildConfig.BUILD_TYPE) ? "production" : "development");
-    Set<String> enabledStages = new HashSet<>();
-    enabledStages.add("development");
-    config.setEnabledReleaseStages(enabledStages);
-    Bugsnag.start(this, config);
-  }
+//  @SuppressWarnings("ConstantConditions")
+//  private void initializeBugsnag() {
+//    Configuration config = Configuration.load(this);
+//    // Disable bugsnag for release builds
+//    config.setReleaseStage("release".equals(BuildConfig.BUILD_TYPE) ? "production" : "development");
+//    Set<String> enabledStages = new HashSet<>();
+//    enabledStages.add("development");
+//    config.setEnabledReleaseStages(enabledStages);
+//    Bugsnag.start(this, config);
+//  }
 
   private static void initializeFlipper(
       Context context, ReactInstanceManager reactInstanceManager) {

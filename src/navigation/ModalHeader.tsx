@@ -52,11 +52,11 @@ const ModalHeader: FunctionComponent<ModalHeaderProps> = ({
   }
 
   return (
-    <View style={style.container}>
+    <View accessibilityLabel={"header"} style={style.container}>
       <Text
         numberOfLines={10}
         style={style.headerText}
-        accessible={headerTitle !== ""}
+        accessible
         allowFontScaling={false}
       >
         {headerTitle}
@@ -64,6 +64,7 @@ const ModalHeader: FunctionComponent<ModalHeaderProps> = ({
       <TouchableOpacity
         onPress={handleOnPressBack}
         hitSlop={{ top: 30, right: 30, bottom: 30, left: 30 }}
+        accessibilityHint={t("accessibility.hint.closes_current_screen")}
         accessibilityLabel={t("common.close_screen")}
       >
         <SvgXml

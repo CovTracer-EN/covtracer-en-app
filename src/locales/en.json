@@ -5,6 +5,18 @@
     "operating_system_abbr": "OS:",
     "version": "Version:"
   },
+  "accessibility": {
+    "hint": {
+      "checks_for_new_exposures": "checks for new COVID-19 exposures",
+      "closes_current_screen": "closes current screen",
+      "deletes_data": "deletes data and navigages to app setup",
+      "navigates_to_external_website": "navigates to external website",
+      "navigates_to_home_screen": "navigates to home screen",
+      "navigates_to_new_screen": "navigates to new screen",
+      "navigates_to_next_screen_without_enabling": "navigates to next screen without enabling Exposure Detection",
+      "opens_share_sheet": "opens share sheet"
+    }
+  },
   "callback": {
     "firstname": "First name (optional)",
     "if_you_prefer": "If you prefer; call directly at:",
@@ -23,12 +35,14 @@
     "continue": "Continue",
     "done": "Done",
     "edit": "Edit",
+    "hascode": "Already have a code?",
     "learn_more": "Learn more",
     "maybe_later": "Maybe later",
     "more": "More",
     "next": "Next",
     "no_thanks": "No thanks",
     "off": "OFF",
+    "ok": "Ok",
     "okay": "Okay",
     "on": "ON",
     "save": "Save",
@@ -69,7 +83,11 @@
     "wear_a_face_covering": "wear a face covering."
   },
   "errors": {
+    "authorization_failure": "You are not authorized to perform this action.",
     "description": "An error has occurred. Please reload the app.",
+    "invalid_phone_number": "Phone number must be 10 digits",
+    "maxed_submission_header": "Maximum submissions reached.",
+    "maxed_submission_requests": "You have reached the max number of submissions, please wait 5 minutes to resubmit.",
     "reload": "Reload",
     "something_went_wrong": "Something went wrong",
     "title": "Unknown Error",
@@ -125,6 +143,7 @@
       "body1": "If you have received a verification code from {{healthAuthorityName}} for a positive COVID-19 test, you can submit the verification code on the following screen.",
       "body2": "If you do not have a code, but you do have a positive test, you will need to get a verification code from {{healthAuthorityName}} before continuing.",
       "header": "Do you have your verification code?",
+      "title": "Verification Code Info",
       "what_is_a": "What is a verification code?"
     },
     "never_mind_button_title": "Never mind",
@@ -184,6 +203,7 @@
     "how_does_this_work_para": "When Exposure Notifications are on, your phone uses Bluetooth Low Energy to swap and save random number strings (called random IDs) from any phones it is in close contact to that also have Exposure Notifications enabled. Random IDs won’t identify you personally to other users and change many times a day to protect your privacy.",
     "last_days": "Last 14 days",
     "more_info": "Learn more about Exposure Notifications",
+    "more_info_header": "More Info",
     "next_steps": "Next Steps",
     "no_connectivity_message": "You are not connected to the internet!",
     "no_exposure_reports": "No Exposure Reports",
@@ -204,8 +224,11 @@
     "cant_check_for_exposures_body": "You must enable Exposure Notifications to check for exposures.",
     "cant_check_for_exposures_button": "Enable Exposure Notifications",
     "cant_check_for_exposures_title": "Can't Check for Exposures",
+    "exposure_check_complete": "Exposure check complete",
     "location_body": "Google requires that devices running Android 10 or below have location services enabled to use Exposure Notifications. {{applicationName}} does NOT track or keep a record of your location.",
     "location_title": "Enable Location Services",
+    "requires_network_body": "Please make sure Airplane Mode is disabled and internet access is available through mobile data or WiFi.",
+    "requires_network_title": "Can't Connect To Network",
     "set_active_region_ios_body": "Open the Settings app, navigate to the Exposure Notifications settings for this app, then press 'Set As Active Region'.",
     "set_active_region_ios_title": "Set Active Region",
     "share_exposure_information_ios_body": "Open the Settings app, then navigate to the Exposure Notifications settings for this app. Ensure 'Share Exposure Information' is turned on, then press 'Set As Active Region'.",
@@ -263,7 +286,8 @@
       "more_info": "What is a verification code?",
       "report_positive_test": "Report Positive Test",
       "submit_code": "Submit code"
-    }
+    },
+    "view_faq": "View FAQ"
   },
   "label": {
     "checked_checkbox": "Checked checkbox",
@@ -312,11 +336,11 @@
       "body_3": "After testing positive for COVID-19, users can share a verification code with {{applicationName}} to verify their diagnosis. Their phone’s recent random IDs are flagged and securely uploaded to the server. This verification process helps prevent false positive reports.",
       "body_4": "If a flagged ID matches with an ID stored on your phone, this indicates you may have encountered someone who has tested positive for COVID-19. This is how {{applicationName}} can determine if you may have been exposed to the virus.",
       "body_5": "If there’s a match, {{applicationName}} will notify you and provide further guidance from your health department.\n\nThis is how {{applicationName}} can empower you to make decisions about your health, and keep your community safe, all without knowing who you are or where you’ve been.",
-      "image_label_1": "An image of a man holding his phone with a nearby random ID character string.",
-      "image_label_2": "An image of two smartphones exchanging random IDs.",
-      "image_label_3": "An image of a man entering an anonymous verification code.",
-      "image_label_4": "An image of a smartphone with several Random IDs and a verification code nearby.",
-      "image_label_5": "An image of a woman using her phone.",
+      "image_label_1": "image of a man holding his phone with a nearby random ID character string.",
+      "image_label_2": "image of two smartphones exchanging random IDs.",
+      "image_label_3": "image of a man entering an anonymous verification code.",
+      "image_label_4": "image of a smartphone with several Random IDs and a verification code nearby.",
+      "image_label_5": "image of a woman using her phone.",
       "subheader_1": "When you turn on Exposure Notifications, your phone is tagged with frequently-changing, random IDs",
       "subheader_2": "Phones with Exposure Notifications enabled swap IDs with other devices they encounter",
       "subheader_3": "When a user tests positive, they can choose to anonymously share their health status",
@@ -358,6 +382,7 @@
     "stop_sharing_data": "Stop Sharing Data"
   },
   "screen_titles": {
+    "activation": "Activation",
     "bluetooth": "Bluetooth",
     "covid_data_webview": "Covid Data",
     "exposure_history": "Exposures",
@@ -367,10 +392,14 @@
     "how_the_app_works": "How the app works",
     "legal": "Legal",
     "location": "Location",
+    "my_data": "My Data",
     "protect_privacy": "How we protect your privacy",
+    "request_callback": "Request Callback",
     "select_language": "Select Language",
     "select_symptoms": "Select Symptoms",
-    "settings": "Settings"
+    "self_assessment": "Self Assessment",
+    "settings": "Settings",
+    "welcome": "Welcome"
   },
   "self_assessment": {
     "age_range": {

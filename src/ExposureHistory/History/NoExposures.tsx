@@ -70,9 +70,19 @@ const NoExposures: FunctionComponent = () => {
 
       {Boolean(healthAuthorityLearnMoreUrl) && (
         <View style={style.sectionContainer}>
-          <Text style={style.subheaderText}>More Info</Text>
+          <Text style={style.subheaderText}>
+            {t("exposure_history.more_info_header")}
+          </Text>
 
-          <TouchableOpacity onPress={handleOnPressHALink} style={style.button}>
+          <TouchableOpacity
+            accessibilityHint={t(
+              "accessibility.hint.navigates_to_external_website",
+            )}
+            accessibilityRole="button"
+            accessibilityLabel={t("exposure_history.review_health_guidance")}
+            onPress={handleOnPressHALink}
+            style={style.button}
+          >
             <Text style={style.buttonText}>
               {t("exposure_history.review_health_guidance")}
             </Text>

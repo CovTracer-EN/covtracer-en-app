@@ -28,6 +28,7 @@ import { Colors, Spacing, Typography } from "../styles"
 type SettingsListItem = {
   label: string
   accessibilityLabel: string
+  accessibilityHint: string
   onPress: () => void
   icon: string
 }
@@ -67,18 +68,21 @@ const Settings: FunctionComponent = () => {
   const selectLanguage: SettingsListItem = {
     label: languageName,
     accessibilityLabel: t("common.select_language"),
+    accessibilityHint: t("accessibility.hint.navigates_to_new_screen"),
     onPress: handleOnPressSelectLanguage,
     icon: Icons.LanguagesIcon,
   }
   const legal: SettingsListItem = {
     label: t("screen_titles.legal"),
     accessibilityLabel: t("screen_titles.legal"),
+    accessibilityHint: t("accessibility.hint.navigates_to_new_screen"),
     onPress: () => navigation.navigate(SettingsStackScreens.Legal),
     icon: Icons.Document,
   }
   const howTheAppWorks: SettingsListItem = {
     label: t("screen_titles.how_the_app_works"),
     accessibilityLabel: t("screen_titles.how_the_app_works"),
+    accessibilityHint: t("accessibility.hint.navigates_to_new_screen"),
     onPress: handleOnPressHowTheAppWorks,
     icon: Icons.RestartWithCheck,
   }
@@ -91,12 +95,14 @@ const Settings: FunctionComponent = () => {
   const deleteMyData: SettingsListItem = {
     label: t("settings.delete_my_data"),
     accessibilityLabel: t("settings.delete_my_data"),
+    accessibilityHint: t("accessibility.hint.navigates_to_new_screen"),
     onPress: handleOnPressDeleteMyData,
     icon: Icons.Trash,
   }
   const debugMenu: SettingsListItem = {
     label: "EN Debug Menu",
     accessibilityLabel: "EN Debug Menu",
+    accessibilityHint: t("accessibility.hint.navigates_to_new_screen"),
     onPress: () => navigation.navigate(SettingsStackScreens.ENDebugMenu),
     icon: Icons.Document,
   }
@@ -133,6 +139,7 @@ const Settings: FunctionComponent = () => {
             <ListItem
               label={selectLanguage.label}
               accessibilityLabel={selectLanguage.accessibilityLabel}
+              accessibilityHint={selectLanguage.accessibilityHint}
               onPress={selectLanguage.onPress}
               icon={selectLanguage.icon}
             />
@@ -153,6 +160,7 @@ const Settings: FunctionComponent = () => {
           <ListItem
             label={deleteMyData.label}
             accessibilityLabel={deleteMyData.label}
+            accessibilityHint={deleteMyData.accessibilityHint}
             onPress={deleteMyData.onPress}
             icon={deleteMyData.icon}
           />
@@ -168,6 +176,7 @@ const Settings: FunctionComponent = () => {
             <ListItem
               label={debugMenu.label}
               accessibilityLabel={debugMenu.label}
+              accessibilityHint={debugMenu.accessibilityHint}
               onPress={debugMenu.onPress}
               icon={debugMenu.icon}
             />

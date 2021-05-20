@@ -54,13 +54,18 @@
   center.delegate = self;
   
   [ExposureManager createSharedInstance];
-  [[ExposureManager shared] registerBackgroundTask];
+  [[ExposureManager shared] registerExposureDetectionBackgroundTask];
+  [[ExposureManager shared] registerDeleteOldExposuresBackgroundTask];
 
   [RNSplashScreen showSplash:@"LaunchScreen" inRootView:rootView];
   
   // Read dev environment variable
 #if DEBUG
-  [Bugsnag start];
+  NSDictionary *infoPlistDict = [[NSBundle mainBundle] infoDictionary];
+  NSString *bugsnagApiKey = infoPlistDict[@"bugsnag"][@"apiKey"];
+  if ([bugsnagApiKey length] > 0) {
+    [Bugsnag start];
+  }
 #else
   if ([[ReactNativeConfig envFor:@"ENABLE_ERROR_REPORTING"]  isEqual: @"true"]) {
     [Bugsnag start];

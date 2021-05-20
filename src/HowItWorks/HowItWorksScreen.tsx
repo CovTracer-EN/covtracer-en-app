@@ -7,6 +7,7 @@ import {
   ScrollView,
   ImageSourcePropType,
   TouchableOpacity,
+  PixelRatio,
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
@@ -50,6 +51,17 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
     navigation.navigate(ModalStackScreens.ProtectPrivacy)
   }
 
+  const imageHeight: () => number = () => {
+    const size = PixelRatio.getPixelSizeForLayoutSize(10)
+    if (size < 30) {
+      return 220
+    } else if (size < 32) {
+      return 180
+    } else {
+      return 100
+    }
+  }
+
   return (
     <>
       <ScrollView
@@ -62,7 +74,8 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
             source={image}
             accessibilityLabel={imageLabel}
             accessible
-            style={style.image}
+            accessibilityRole="image"
+            style={[style.image, { height: imageHeight() }]}
             resizeMode={"contain"}
           />
           <Text style={style.headerText}>{header}</Text>
@@ -74,13 +87,17 @@ const HowItWorksScreen: FunctionComponent<HowItWorksScreenProps> = ({
             style={style.button}
             onPress={primaryButtonOnPress}
             accessibilityLabel={primaryButtonLabel}
+            accessibilityRole="button"
+            accessibilityHint={t("accessibility.hint.navigates_to_new_screen")}
           >
             <Text style={style.buttonText}>{primaryButtonLabel}</Text>
             <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={handleOnPressProtectPrivacy}
+            accessibilityLabel={t("onboarding.protect_privacy_button")}
             accessibilityRole="button"
+            accessibilityHint={t("accessibility.hint.navigates_to_new_screen")}
           >
             <Text style={style.bottomButtonText}>
               {t("onboarding.protect_privacy_button")}
@@ -115,7 +132,6 @@ const createStyle = (insets: EdgeInsets) => {
     },
     image: {
       width: "97%",
-      height: 220,
       marginBottom: Spacing.medium,
     },
     headerText: {

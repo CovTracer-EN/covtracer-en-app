@@ -15,6 +15,7 @@ import { Text } from "../components"
 
 import { Spacing, Colors, Typography, Buttons, Iconography } from "../styles"
 import { Icons, Images } from "../assets"
+import HasVerificationCode from "./HasVerificationCode"
 
 export const Start: FunctionComponent = () => {
   useStatusBarEffect("dark-content", Colors.background.primaryLight)
@@ -60,9 +61,13 @@ export const Start: FunctionComponent = () => {
           <Text style={style.buttonText}>{t("common.continue")}</Text>
           <SvgXml xml={Icons.Arrow} fill={Colors.background.primaryLight} />
         </TouchableOpacity>
+        {/* If user already has verification code. */}
+        <HasVerificationCode />
         <TouchableOpacity
           style={style.secondaryButton}
           onPress={handleOnPressSecondaryButton}
+          accessibilityRole="button"
+          accessibilityHint={t("accessibility.hint.navigates_to_new_screen")}
           accessibilityLabel={t("export.intro.what_is_a")}
         >
           <View style={style.secondaryButtonIconContainer}>

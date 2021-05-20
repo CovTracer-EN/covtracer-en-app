@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react"
+import React, { useRef, FunctionComponent, useEffect, useState } from "react"
 import {
   Alert,
   StyleSheet,
@@ -10,6 +10,8 @@ import {
   Platform,
   TouchableOpacity,
   KeyboardTypeOptions,
+  findNodeHandle,
+  AccessibilityInfo,
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { useTranslation } from "react-i18next"
@@ -51,6 +53,7 @@ const CodeInputForm: FunctionComponent<CodeInputFormProps> = ({ linkCode }) => {
   const navigation = useNavigation()
   const strategy = useExposureContext()
   const { trackEvent } = useProductAnalyticsContext()
+  const codeInputRef = useRef<TextInput>(null)
   const {
     setExposureSubmissionCredentials,
     setExposureKeys,
@@ -64,6 +67,18 @@ const CodeInputForm: FunctionComponent<CodeInputFormProps> = ({ linkCode }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState(defaultErrorMessage)
   const [isFocused, setIsFocused] = useState(false)
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (codeInputRef.current) {
+        codeInputRef.current?.focus()
+        const reactTag = findNodeHandle(codeInputRef.current)
+        if (reactTag) {
+          AccessibilityInfo.setAccessibilityFocus(reactTag)
+        }
+      }
+    }, 200)
+  }, [])
 
   const handleOnChangeText = (newCode: string) => {
     setCode(newCode)
@@ -250,6 +265,8 @@ const CodeInputForm: FunctionComponent<CodeInputFormProps> = ({ linkCode }) => {
         </View>
         <TextInput
           editable={isEditable}
+          ref={codeInputRef}
+          accessible
           testID="code-input"
           value={code}
           keyboardType={verificationCodeKeyboardType}

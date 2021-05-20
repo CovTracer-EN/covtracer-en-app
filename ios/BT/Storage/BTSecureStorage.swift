@@ -166,7 +166,9 @@ class BTSecureStorage {
     try! realmInstance.write {
       userState.exposures.append(objectsIn: exposures)
       let jsonString = userState.exposures.jsonStringRepresentation()
-      notificationCenter.post(name: .ExposuresDidChange, object: jsonString)
+      if !exposures.isEmpty {
+        notificationCenter.post(name: .ExposuresDidChange, object: jsonString)
+      }
     }
   }
 
@@ -199,6 +201,14 @@ class BTSecureStorage {
     try! realmInstance.write {
       let allObjects = realmInstance.objects(SymptomLogEntry.self)
       realmInstance.delete(allObjects)
+    }
+  }
+
+  func deleteExposuresOlderThan(_ days: Int) {
+    let realmInstance = realm()
+    try! realmInstance.write {
+      let staleObjects = realmInstance.objects(Exposure.self).filter("date <= %@", Date.daysAgoInPosix(days))
+      realmInstance.delete(staleObjects)
     }
   }
 

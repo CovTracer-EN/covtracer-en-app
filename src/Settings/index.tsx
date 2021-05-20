@@ -89,6 +89,7 @@ const Settings: FunctionComponent = () => {
   const contactPage: SettingsListItem = {
     label: t("screen_titles.contact"),
     accessibilityLabel: t("screen_titles.contact"),
+    accessibilityHint: t("accessibility.hint.navigates_to_new_screen"),
     onPress: handleOnPressContact,
     icon: Icons.Phone,
   }

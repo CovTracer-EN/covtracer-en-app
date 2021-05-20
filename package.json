@@ -1,6 +1,6 @@
 {
   "name": "covtracer",
-  "version": "3.3.11-51",
+  "version": "3.3.12-52",
   "license": "MIT",
   "private": true,
   "scripts": {

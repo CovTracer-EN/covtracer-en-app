@@ -106,3 +106,4 @@ ios/COVIDSafePaths.xcworkspace/xcshareddata/swiftpm/Package.resolved
 test-coverage
 
 app.*.apk
+cy.gov.dmrid.covtracer.keystore*

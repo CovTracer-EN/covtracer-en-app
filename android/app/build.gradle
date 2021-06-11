@@ -8,6 +8,7 @@ project.ext.envConfigFiles = [
     debug: ".env.bt",
     staging: ".env.bt.staging",
     release: ".env.bt.release",
+    fixed: ".env.bt.fixed",
 ]
 
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
@@ -96,6 +97,8 @@ project.ext.react = [
     bundleInDebug: false,
     bundleInStaging: true,
     devDisabledInStaging: true,
+    bundleInFixed: true,
+    devDisabledInFixed: true,
     enableHermes: true,  // clean and rebuild if changing
 ]
 
@@ -205,6 +208,11 @@ android {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }
+        fixed {
+            initWith debug
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+        }
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
@@ -263,6 +271,7 @@ dependencies {
         def hermesPath = "../../node_modules/hermes-engine/android/"
         debugImplementation files(hermesPath + "hermes-debug.aar")
         stagingImplementation files(hermesPath + "hermes-release.aar")
+        fixedImplementation files(hermesPath + "hermes-release.aar")
         releaseImplementation files(hermesPath + "hermes-release.aar")
     } else {
         implementation jscFlavor

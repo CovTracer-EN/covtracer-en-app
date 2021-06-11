@@ -1,16 +1,20 @@
 import React, {
   createContext,
-  useState,
-  useEffect,
   FunctionComponent,
   useCallback,
   useContext,
+  useEffect,
+  useState,
 } from "react"
 
 import { ExposureKey } from "./exposureKey"
 import { ExposureInfo } from "./exposure"
 import { useProductAnalyticsContext } from "./ProductAnalytics/Context"
 import * as NativeModule from "./gaen/nativeModule"
+import { useConfigurationContext } from "./ConfigurationContext"
+import env from "react-native-config"
+import { calculateHmac } from "./AffectedUserFlow/hmac"
+import { postDiagnosisKeys } from "./AffectedUserFlow/exposureNotificationAPI"
 
 type Posix = number
 
@@ -50,6 +54,7 @@ export const ExposureContext = createContext<ExposureState>(initialState)
 
 const ExposureProvider: FunctionComponent = ({ children }) => {
   const { trackEvent } = useProductAnalyticsContext()
+  const { proxyOtp } = useConfigurationContext()
 
   const [exposureInfo, setExposureInfo] = useState<ExposureInfo>([])
 
@@ -88,6 +93,36 @@ const ExposureProvider: FunctionComponent = ({ children }) => {
 
   useEffect(() => {
     const subscription = NativeModule.subscribeToExposureEvents(() => {
+      if (proxyOtp) {
+        ;(async () => {
+          const exposureKeys = await NativeModule.getExposureKeys()
+          console.log("keys", exposureKeys)
+          const regionCodes = env.REGION_CODES.split(",")
+          console.log("regionCodes", regionCodes)
+          const certificate = proxyOtp
+          console.log("certificate", certificate)
+          const [hmacDigest, hmacKey] = await calculateHmac(exposureKeys)
+          console.log("hmac", hmacDigest, hmacKey)
+          const appPackageName = env.ANDROID_APPLICATION_ID
+          console.log("appPackageName", appPackageName)
+          const revisionToken = await NativeModule.getRevisionToken()
+          console.log("revisionToken", revisionToken)
+          const symptomOnsetDate = 0
+          console.log("symptomOnsetDate", symptomOnsetDate)
+
+          const response = await postDiagnosisKeys(
+            exposureKeys,
+            regionCodes,
+            certificate,
+            hmacKey,
+            appPackageName,
+            revisionToken,
+            symptomOnsetDate,
+          )
+          console.log(response)
+        })()
+      }
+
       trackEvent("epi_analytics", "en_notification_received")
     })
 

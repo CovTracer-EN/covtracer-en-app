@@ -40,6 +40,7 @@ export interface Configuration {
   stateAbbreviation: string | null
   supportPhoneNumber: string | null
   verificationStrategy: VerificationStrategy
+  proxyOtp?: string
 }
 
 const initialState: Configuration = {
@@ -161,6 +162,8 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
     ? DEFAULT_QUARANTINE_LENGTH
     : envQuarantineLength
 
+  const proxyOtp = env.PROXY_OTP
+
   return (
     <ConfigurationContext.Provider
       value={{
@@ -199,6 +202,7 @@ const ConfigurationProvider: FunctionComponent = ({ children }) => {
         stateAbbreviation,
         supportPhoneNumber,
         verificationStrategy,
+        proxyOtp,
       }}
     >
       {children}
